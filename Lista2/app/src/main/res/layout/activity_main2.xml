@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main2Activity">
+
+    <ImageView
+        android:id="@+id/image_detalhe"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:src="@drawable/p001"/>
+
+    <TextView
+        android:id="@+id/title_detalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalhes do Pokemon"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintTop_toBottomOf="@+id/image_detalhe"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toBottomOf="@id/title_detalhe">
+
+        <TextView
+            android:id="@+id/nome_detalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondaryDarkColor"
+            android:text="Pokemon"
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/descricao_detalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="blah blah blah blah blah
+             blah blah blah blah blah
+             blah blah blah blah blah"
+            android:layout_below="@id/nome_detalhe"/>
+
+        <TextView
+            android:id="@+id/label_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/secondaryDarkColor"
+            android:text="Numero na Pokedex"
+            android:textSize="20dp"
+            android:layout_below="@id/descricao_detalhe"/>
+        <TextView
+            android:id="@+id/numero_detalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="nº 001"
+            android:layout_below="@id/label_num"/>
+        <TextView
+            android:id="@+id/label_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/secondaryDarkColor"
+            android:layout_below="@id/numero_detalhe"
+            android:text="Tipo:"
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/tipo_detalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grass"
+            android:layout_below="@id/label_tipo"/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

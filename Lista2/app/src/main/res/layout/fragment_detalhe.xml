@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetalheFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image_detalhe_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:src="@drawable/p001"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/title_detalhe_frag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalhes do Pokemon"
+            android:textSize="30dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center_vertical|center_horizontal"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/nome_detalhe_frag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondaryDarkColor"
+                android:text="Pokemon"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/descricao_detalhe_frag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="blah blah blah blah blah
+                 blah blah blah blah blah
+                 blah blah blah blah blah"
+                android:layout_below="@id/nome_detalhe_frag"/>
+
+            <TextView
+                android:id="@+id/label_num_frag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:text="Numero na Pokedex"
+                android:textSize="20dp"
+                android:layout_below="@id/descricao_detalhe_frag"/>
+            <TextView
+                android:id="@+id/numero_detalhe_frag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="nº 001"
+                android:layout_below="@id/label_num_frag"/>
+            <TextView
+                android:id="@+id/label_tipo_frag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:layout_below="@id/numero_detalhe_frag"
+                android:text="Tipo:"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/tipo_detalhe_frag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Grass"
+                android:layout_below="@id/label_tipo_frag"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</FrameLayout>
