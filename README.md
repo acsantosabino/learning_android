@@ -5,5 +5,10 @@ Repositório com exercícios para praticar o desenvolvimento de apps para androi
 
 Primeira aplicação com botões com ações
 
+## 2 - [LOGIN] 
+
+Aplicação com troca de atividades passando informações de uma atividade para a outra. Uma atividade de login valida localmete o usuario e passa para a proxima atividade o email do usuario.
+
 <!-- Links -->
 [TEST]: https://github.com/acsantosabino/learning_android/tree/master/Teste
+[LOGIN]: https://github.com/acsantosabino/learning_android/tree/master/Login
