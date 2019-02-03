@@ -9,6 +9,11 @@ Primeira aplicação com botões com ações
 
 Aplicação com troca de atividades passando informações de uma atividade para a outra. Uma atividade de login valida localmete o usuario e passa para a proxima atividade o email do usuario.
 
+## 3 - [LISTA 1] 
+
+Aplicação com uma lista simples e troca de atividades passando informações de uma atividade para a outra.
+
 <!-- Links -->
 [TEST]: https://github.com/acsantosabino/learning_android/tree/master/Teste
 [LOGIN]: https://github.com/acsantosabino/learning_android/tree/master/Login
+[LISTA 1]: https://github.com/acsantosabino/learning_android/tree/master/Lista1
