@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/principal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10px">
+
+        <LinearLayout
+            android:id="@+id/team_a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="40px"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/team_a_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Team A" />
+
+            <TextView
+                android:id="@+id/team_a_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="25px"
+                android:layout_marginBottom="25px"
+                android:text="0"
+                android:textSize="100px"/>
+
+            <Button
+                android:id="@+id/team_a_3plus_bnt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+3 Points"
+                android:onClick="updateScore"/>
+
+            <Button
+                android:id="@+id/team_a_2plus_bnt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+2 Points"
+                android:onClick="updateScore"/>
+
+            <Button
+                android:id="@+id/team_a_1plus_bnt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FREE THROW"
+                android:onClick="updateScore"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#000"></View>
+
+        <LinearLayout
+            android:id="@+id/team_b"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="40px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/team_b_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Team B" />
+
+            <TextView
+                android:id="@+id/team_b_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="25px"
+                android:layout_marginBottom="25px"
+                android:text="0"
+                android:textSize="100px"/>
+
+            <Button
+                android:id="@+id/team_b_3plus_bnt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+3 Points"
+                android:onClick="updateScore"/>
+
+            <Button
+                android:id="@+id/team_b_2plus_bnt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+2 Points"
+                android:onClick="updateScore"/>
+
+            <Button
+                android:id="@+id/team_b_1plus_bnt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FREE THROW"
+                android:onClick="updateScore"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bnt_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="100px"
+        android:text="RESET"
+        android:onClick="resetScore"/>
+
+</android.widget.RelativeLayout>
