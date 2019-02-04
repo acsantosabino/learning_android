@@ -18,8 +18,13 @@ Aplicação com uma lista simples e troca de atividades passando informações d
 
 Aplicação com uma lista customisada e troca de atividades passando objeto de uma atividade para a outra.
 
+## 5 - [TASKAPP] 
+
+Aplicação com uma AsyncTask.
+
 <!-- Links -->
 [TEST]: https://github.com/acsantosabino/learning_android/tree/master/Teste
 [LOGIN]: https://github.com/acsantosabino/learning_android/tree/master/login
 [LISTA 1]: https://github.com/acsantosabino/learning_android/tree/master/Lista1
 [LISTA 2]: https://github.com/acsantosabino/learning_android/tree/master/Lista2
+[TASKAPP]: https://github.com/acsantosabino/learning_android/tree/master/TaskApp
