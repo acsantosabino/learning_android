@@ -14,12 +14,12 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,7 +55,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-        "foo@example.com:hello", "bar@example.com:world"
+//        "foo@example.com:hello", "bar@example.com:world",
+        "sandro.moreira@unirv.edu.br:123456"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -73,10 +74,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +99,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        // Confere sessão aberta
+        String token = SessionHandler.getToken(this);
+        if(!token.isEmpty()) {
+            String[] cred = DUMMY_CREDENTIALS[0].split(":");
+            login(cred[0],cred[1]);
+        }
     }
 
     private void populateAutoComplete() {
@@ -193,6 +200,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView = mEmailView;
             cancel = true;
         }
+        String[] cred = DUMMY_CREDENTIALS[0].split(":");
+        if(!email.equals(cred[0]) & !password.equals(cred[1])){
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -201,11 +215,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new WebTaskLogin(this, email, password);
-            mAuthTask.setSilent(false);
-            mAuthTask.execute((Void) null);
+            this.login(email, password);
         }
+    }
+
+    private void login(String email, String psw) {
+        showProgress(true);
+        mAuthTask = new WebTaskLogin(this, email, psw);
+        mAuthTask.setSilent(false);
+        mAuthTask.execute((Void) null);
     }
 
     private boolean isEmailValid(String email) {
@@ -311,6 +329,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Subscribe
     public void onEvent(Usuario user){
         mAuthTask = null;
+        SessionHandler.saveToken(user.getToken(),this);
         showProgress(false);
 
         Intent i = new Intent(this, PerfilActivity.class);

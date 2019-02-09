@@ -1,31 +1,12 @@
 package com.aluno.arthur.taskapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.util.Base64;
 
 public class PerfilActivity extends AppCompatActivity {
 
@@ -48,6 +29,11 @@ public class PerfilActivity extends AppCompatActivity {
         nome = findViewById(R.id.perfil_name);
         nome.setText(this.user.getNome());
 
+    }
+
+    public void logout(View view) {
+        SessionHandler.saveToken("",this);
+        finish();
     }
 
 }

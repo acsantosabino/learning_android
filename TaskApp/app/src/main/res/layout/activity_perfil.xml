@@ -20,5 +20,14 @@
         android:textSize="40dp"
         android:layout_centerVertical="true"
         android:text="Son Goku"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout_btn"
+        android:background="@color/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:onClick="logout"/>
 
 </RelativeLayout>
