@@ -22,9 +22,14 @@ Aplicação com uma lista customisada e troca de atividades passando objeto de u
 
 Aplicação com uma AsyncTask.
 
+## 6 - [SQLITE]
+
+Aplicação com implementação completa do banco de dados local. Sqlite
+
 <!-- Links -->
 [TEST]: https://github.com/acsantosabino/learning_android/tree/master/Teste
 [LOGIN]: https://github.com/acsantosabino/learning_android/tree/master/login
 [LISTA 1]: https://github.com/acsantosabino/learning_android/tree/master/Lista1
 [LISTA 2]: https://github.com/acsantosabino/learning_android/tree/master/Lista2
 [TASKAPP]: https://github.com/acsantosabino/learning_android/tree/master/TaskApp
+[SQLITE]: https://github.com/acsantosabino/learning_android/tree/master/SQLiteApp
