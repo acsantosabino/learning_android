@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cam App</string>
+    <string name="btn_take_pic">Take Pic</string>
+    <string name="error_permission_not_granted">Permição negada : </string>
+    <string name="permission_request_canceled">Permição necessaria : </string>
+    <string name="title_error">Erro</string>
+    <string name="label_ok">Ok</string>
+</resources>

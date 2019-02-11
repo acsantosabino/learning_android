@@ -26,6 +26,10 @@ Aplicação com uma AsyncTask.
 
 Aplicação com implementação completa do banco de dados local. Sqlite
 
+## 6 - [CAMAPP]
+
+Aplicação utilizando sensores, uso da camera.
+
 <!-- Links -->
 [TEST]: https://github.com/acsantosabino/learning_android/tree/master/Teste
 [LOGIN]: https://github.com/acsantosabino/learning_android/tree/master/login
@@ -33,3 +37,4 @@ Aplicação com implementação completa do banco de dados local. Sqlite
 [LISTA 2]: https://github.com/acsantosabino/learning_android/tree/master/Lista2
 [TASKAPP]: https://github.com/acsantosabino/learning_android/tree/master/TaskApp
 [SQLITE]: https://github.com/acsantosabino/learning_android/tree/master/SQLiteApp
+[CAMAPP]: https://github.com/acsantosabino/learning_android/tree/master/CamApp
