@@ -30,6 +30,17 @@ Aplicação com implementação completa do banco de dados local. Sqlite
 
 Aplicação utilizando sensores, uso da camera.
 
+## 7 - [PROJETO]
+
+Projeto prático de aplicativo
+
+### Requisitos:
+
+* Conexão a internet
+* Uso de algum sensor
+* Uso de banco de dados
+* Pelo menos 3 telas
+
 <!-- Links -->
 [TEST]: https://github.com/acsantosabino/learning_android/tree/master/Teste
 [LOGIN]: https://github.com/acsantosabino/learning_android/tree/master/login
@@ -38,3 +49,4 @@ Aplicação utilizando sensores, uso da camera.
 [TASKAPP]: https://github.com/acsantosabino/learning_android/tree/master/TaskApp
 [SQLITE]: https://github.com/acsantosabino/learning_android/tree/master/SQLiteApp
 [CAMAPP]: https://github.com/acsantosabino/learning_android/tree/master/CamApp
+[PROJETO]: https://github.com/acsantosabino/learning_android/tree/master/Projeto
