@@ -129,4 +129,18 @@ public class BookActivity extends AppCompatActivity {
         Log.e("BOOK ERROR",error.getMessage());
     }
 
+    public void setBookCover() {
+        File imgFile = new  File(this.getFilesDir(),this.book.getIsbn()+".jpg");
+
+        if(imgFile.exists()){
+
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+            ImageView myImage = (ImageView) findViewById(R.id.book_cover);
+
+            myImage.setImageBitmap(myBitmap);
+
+        }
+    }
+
 }
