@@ -118,7 +118,7 @@ public class ImgDownload extends AsyncTask {
         File file = new File(context.getFilesDir(), imgName+".jpg");
         OutputStream outputStream = new FileOutputStream(file);
 
-        bitmap.compress(Bitmap.CompressFormat.JPEG,128,outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,90,outputStream);
         outputStream.flush();
         outputStream.close();
 

@@ -52,7 +52,8 @@ public class BookActivity extends AppCompatActivity {
         mBookFormView = findViewById(R.id.book_form);
         mProgressView = findViewById(R.id.load_book_progress);
 
-        bookReqTask = new BookReqTask(this, "9788578274085");
+//        bookReqTask = new BookReqTask(this, "9788578274085");
+        bookReqTask = new BookReqTask(this, "9781442426733");
         showProgress(true);
         bookReqTask.execute();
     }
@@ -121,6 +122,14 @@ public class BookActivity extends AppCompatActivity {
         showProgress(false);
     }
 
+
+    @Subscribe
+    public void onEvent(String imgPath) {
+        showProgress(false);
+        this.book.setImagePath(imgPath);
+
+        setBookCover();
+    }
 
     @Subscribe
     public void onEvent(Error error) {

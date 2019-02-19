@@ -66,6 +66,7 @@ public class BookReqTask extends AsyncTask {
                         Book book = JsonParer.parseBook(responseString);
                         String path = JsonParer.parseImgUrl(responseString);
                         ImgDownload imgTask = new ImgDownload(context, path, book.getIsbn());
+                        imgTask.execute();
                         EventBus.getDefault().post(book);
                     } catch (JSONException e) {
                         EventBus.getDefault().post(new Error(e.getMessage()));
