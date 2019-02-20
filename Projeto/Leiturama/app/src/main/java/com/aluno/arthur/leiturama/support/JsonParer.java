@@ -17,14 +17,14 @@ public class JsonParer {
         JSONArray isbnArray = volumeInfo.getJSONArray("industryIdentifiers");
 
         Book book = new Book();
-        book.setIsbn(isbnArray.getJSONObject(0).getString("identifier"));
-        book.setTitle(volumeInfo.getString("title"));
+        book.setIsbn(testKeyAndGetString(isbnArray.getJSONObject(0),"identifier"));
+        book.setTitle(testKeyAndGetString(volumeInfo,"title"));
         book.setAuthor(jsonArrayToString(volumeInfo.getJSONArray("authors")));
-        book.setPublisher(volumeInfo.getString("publisher"));
-        book.setPublishedDate(volumeInfo.getString("publishedDate"));
-        book.setDescription(volumeInfo.getString("description"));
-        book.setPageCount(volumeInfo.getInt("pageCount"));
-        book.setCategories(jsonArrayToString(volumeInfo.getJSONArray("categories")));
+        book.setPublisher(testKeyAndGetString(volumeInfo,"publisher"));
+        book.setPublishedDate(testKeyAndGetString(volumeInfo,"publishedDate"));
+        book.setDescription(testKeyAndGetString(volumeInfo,"description"));
+        book.setPageCount(testKeyAndGetInt(volumeInfo,"pageCount"));
+        book.setCategories(jsonArrayToString(testKeyAndGetJSONArray(volumeInfo,"categories")));
 
         return book;
     }
@@ -36,10 +36,49 @@ public class JsonParer {
         JSONObject volumeInfo = json.getJSONArray("items")
             .getJSONObject(0).getJSONObject("volumeInfo");
 
-        String path = volumeInfo.getJSONObject("imageLinks")
-            .getString("thumbnail");
+        JSONObject imgLinks = testKeyAndGetJSONObject(volumeInfo,"imageLinks");
+
+        String path = testKeyAndGetString(imgLinks,"thumbnail");
+
+        if (path == "unknown") path=null;
 
         return path;
+    }
+
+    private static String testKeyAndGetString(JSONObject jsonObject, String key) throws JSONException{
+
+        if (jsonObject.has(key)){
+            return jsonObject.getString(key);
+        }
+        else
+            return "unknown";
+    }
+
+    private static int testKeyAndGetInt(JSONObject jsonObject, String key) throws JSONException{
+
+        if (jsonObject.has(key)){
+            return jsonObject.getInt(key);
+        }
+        else
+            return 0;
+    }
+
+    private static JSONArray testKeyAndGetJSONArray(JSONObject jsonObject, String key) throws JSONException{
+
+        if (jsonObject.has(key)){
+            return jsonObject.getJSONArray(key);
+        }
+        else
+            return new JSONArray();
+    }
+
+    private static JSONObject testKeyAndGetJSONObject(JSONObject jsonObject, String key) throws JSONException{
+
+        if (jsonObject.has(key)){
+            return jsonObject.getJSONObject(key);
+        }
+        else
+            return new JSONObject();
     }
 
     private static String jsonArrayToString(JSONArray jsonArray) throws JSONException{

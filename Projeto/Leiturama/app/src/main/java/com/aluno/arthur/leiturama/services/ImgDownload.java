@@ -6,17 +6,13 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Environment;
 
 import com.aluno.arthur.leiturama.R;
-import com.aluno.arthur.leiturama.models.Book;
-import com.aluno.arthur.leiturama.support.JsonParer;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,7 +49,9 @@ public class ImgDownload extends AsyncTask {
             return null;
         }
 
-        doRegularCall();
+        if(imgUrl != null){
+            doRegularCall();
+        }
 
         return null;
     }

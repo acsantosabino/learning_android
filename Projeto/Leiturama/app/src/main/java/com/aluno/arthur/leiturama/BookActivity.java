@@ -3,12 +3,13 @@ package com.aluno.arthur.leiturama;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,7 +23,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 
-public class BookActivity extends AppCompatActivity {
+public class BookActivity extends AppCompatActivity{
 
     private View mProgressView;
     private View mBookFormView;
@@ -52,8 +53,9 @@ public class BookActivity extends AppCompatActivity {
         mBookFormView = findViewById(R.id.book_form);
         mProgressView = findViewById(R.id.load_book_progress);
 
-//        bookReqTask = new BookReqTask(this, "9788578274085");
-        bookReqTask = new BookReqTask(this, "9781442426733");
+        Intent i = getIntent();
+        String isbn = i.getStringExtra("ISBN");
+        bookReqTask = new BookReqTask(this, isbn);
         showProgress(true);
         bookReqTask.execute();
     }
@@ -151,5 +153,4 @@ public class BookActivity extends AppCompatActivity {
 
         }
     }
-
 }
