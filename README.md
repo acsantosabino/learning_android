@@ -30,7 +30,11 @@ Aplicação com implementação completa do banco de dados local. Sqlite
 
 Aplicação utilizando sensores, uso da camera.
 
-## 7 - [PROJETO]
+## 7 - [FIREBASEAPP]
+
+Projeto prático de aplicativo
+
+## 8 - [PROJETO]
 
 Projeto prático de aplicativo
 
@@ -49,4 +53,5 @@ Projeto prático de aplicativo
 [TASKAPP]: https://github.com/acsantosabino/learning_android/tree/master/TaskApp
 [SQLITE]: https://github.com/acsantosabino/learning_android/tree/master/SQLiteApp
 [CAMAPP]: https://github.com/acsantosabino/learning_android/tree/master/CamApp
+[FIREBASEAPP]: https://github.com/acsantosabino/learning_android/tree/master/FirebaseApp
 [PROJETO]: https://github.com/acsantosabino/learning_android/tree/master/Projeto
