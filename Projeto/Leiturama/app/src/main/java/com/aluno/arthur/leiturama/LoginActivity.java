@@ -319,7 +319,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         else {
             Toast.makeText(LoginActivity.this, user.getEmail() + " logado",Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, BarCodeExampleActivity.class);
+            Intent i = new Intent(this, BibliotecaActivity.class);
             startActivity(i);
         }
     }
