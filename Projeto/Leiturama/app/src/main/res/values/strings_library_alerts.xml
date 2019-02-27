@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="request_borrowing_title">Ask for the book?</string>
+    <string name="request_borrowing_msg">Esse livro esta disponivel para emprestimo.\
+        Para solicitar ao dono click em "SIM".</string>
+    <string name="confirm_borrowing_title">Accept to borrow?</string>
+    <string name="confirm_borrowing_msg">Esse livro foi solicitado.\
+        Clique em "SIM" para dizer que aceita emprestar.</string>
+    <string name="assign_devolution_title">Return book?</string>
+    <string name="assign_devolution_msg">Clique em "SIM" para devolver esse livro.\
+        A devolução sera confirmada pelo dono do livro.</string>
+    <string name="confirm_devolution_title">The book has been returned?</string>
+    <string name="confirm_devolution_msg">Esse livro foi marcado como devolvido.\
+        Clique em "SIM" para confirmar a devolvolução.</string>
+</resources>
