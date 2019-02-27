@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_perfil_edit"
+        android:title="@string/menu_edit_perfil"/>
+    <item
+        android:id="@+id/menu_perfil_add"
+        android:title="@string/menu_add_book"/>
+
+</menu>
