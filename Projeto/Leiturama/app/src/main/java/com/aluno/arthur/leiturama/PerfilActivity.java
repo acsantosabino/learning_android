@@ -43,6 +43,8 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
     private ArrayList<String> books;
     private static final int REQUEST_CAMERA = 1;
     private BarCodeDialog barCodeDialog;
+    private User user;
+    private int ownedBooks = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,6 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
         barCodeDialog = new BarCodeDialog(this);
         barCodeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        this.setVisible(false);
         readUser();
     }
 
@@ -94,20 +95,21 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
     }
 
     private void readUser(){
-        FirebaseUser user = FBLoader.fbAuth.getCurrentUser();
-        FBLoader.fbFirestore.collection("user").document(user.getUid())
+        FirebaseUser fbUser = FBLoader.fbAuth.getCurrentUser();
+        FBLoader.fbFirestore.collection("user").document(fbUser.getUid())
             .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User u = documentSnapshot.toObject(User.class);
-                mPerfilName.setText(u.getName());
-                mPhone.setText(u.getPhone());
+                user = documentSnapshot.toObject(User.class);
+                mPerfilName.setText(user.getName());
+                mPhone.setText(user.getPhone());
                 String stats = new String();
-                stats += u.getN_lent() + " lent";
+                stats += user.getN_lent() + " lent";
                 stats += " | ";
-                stats += u.getN_borrowed() + " read";
+                stats += ownedBooks + " owned";
+                stats += " | ";
+                stats += user.getN_borrowed() + " read";
                 mStats.setText(stats);
-                setVisible(true);
             }
         });
     }
@@ -115,10 +117,18 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
     private void updateList(){
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,books);
         mBooks.setAdapter(adaptador);
+        String stats = new String();
+        stats += user.getN_lent() + " lent";
+        stats += " | ";
+        stats += ownedBooks + " owned";
+        stats += " | ";
+        stats += user.getN_borrowed() + " read";
+        mStats.setText(stats);
     }
 
     private void readBooks(){
         books = new ArrayList();
+        ownedBooks = 0;
         CollectionReference booksRef= FBLoader.fbFirestore.collection("books");
         booksRef.orderBy("title", Query.Direction.ASCENDING).get()
             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -127,7 +137,10 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Book book = document.toObject(Book.class);
-                            books.add(book.getTitle());
+                            if( book.getOwner().getId().equals(user.getId())) {
+                                books.add(book.getTitle());
+                                ownedBooks += 1;
+                            }
                         }
                         updateList();
                     } else {
@@ -192,6 +205,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
     public void onSucssesRead(String isbn) {
         Intent i = new Intent(PerfilActivity.this, BookActivity.class);
         i.putExtra("ISBN",isbn);
+        i.putExtra("USER",user);
         startActivity(i);
     }
 }

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.aluno.arthur.leiturama.models.Book;
+import com.aluno.arthur.leiturama.models.User;
 import com.aluno.arthur.leiturama.services.BookReqTask;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,6 +49,7 @@ public class BookActivity extends AppCompatActivity {
     private BookReqTask bookReqTask;
     private FirebaseFirestore db;
     private Book book;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,7 @@ public class BookActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String isbn = i.getStringExtra("ISBN");
+        user = (User) i.getSerializableExtra("USER");
 
         this.book = new Book(isbn);
         bookReqTask = new BookReqTask(this, isbn);
@@ -205,6 +208,7 @@ public class BookActivity extends AppCompatActivity {
 
         if (this.isValid()) {
 
+            book.setOwner(user);
             db.collection("books").add(this.book);
 
             BitmapDrawable bitmapDrawable = (BitmapDrawable) mCover.getDrawable();
