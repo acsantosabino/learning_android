@@ -62,15 +62,15 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
         barCodeDialog = new BarCodeDialog(this);
         barCodeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        readUser();
+
         mBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LibraryDialogs libraryDialogs = new LibraryDialogs(PerfilActivity.this, LibraryDialogs.AlertType.CONFIRM_BORROWRING, booksComplete.get(position));
+                LibraryDialogs libraryDialogs = new LibraryDialogs(PerfilActivity.this, booksComplete.get(position), user);
                 libraryDialogs.showAlert();
             }
         });
-
-        readUser();
     }
 
     @Override
@@ -121,6 +121,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
                 stats += " | ";
                 stats += user.getN_borrowed() + " read";
                 mStats.setText(stats);
+
             }
         });
     }
@@ -150,6 +151,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Book book = document.toObject(Book.class);
                             if( book.getOwner().getId().equals(user.getId())) {
+                                book.setId(document.getId());
                                 books.add(book.getTitle());
                                 booksComplete.add(book);
                                 ownedBooks += 1;

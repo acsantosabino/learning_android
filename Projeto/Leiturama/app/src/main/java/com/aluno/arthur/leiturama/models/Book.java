@@ -1,9 +1,19 @@
 package com.aluno.arthur.leiturama.models;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Book implements Serializable {
 
+    public enum BookStatus {
+
+        AVAILABLE,
+        LENT,
+        BORROW_ASKED,
+        DEVOLUTION_ASKED;
+    }
+
+    private String id;
     private String isbn;
     private String title;
     private String author;
@@ -20,6 +30,14 @@ public class Book implements Serializable {
 
     public Book(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getIsbn() {
@@ -109,4 +127,5 @@ public class Book implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

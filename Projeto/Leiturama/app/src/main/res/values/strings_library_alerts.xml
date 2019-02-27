@@ -12,4 +12,6 @@
     <string name="confirm_devolution_title">The book has been returned?</string>
     <string name="confirm_devolution_msg">Esse livro foi marcado como devolvido.\
         Clique em "SIM" para confirmar a devolvolução.</string>
+
+    <string name="no_action_available">You can not act over this book.</string>
 </resources>
