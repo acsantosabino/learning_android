@@ -64,11 +64,12 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
 
         readUser();
 
-        mBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mBooks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 LibraryDialogs libraryDialogs = new LibraryDialogs(PerfilActivity.this, booksComplete.get(position), user);
                 libraryDialogs.showAlert();
+                return true;
             }
         });
     }

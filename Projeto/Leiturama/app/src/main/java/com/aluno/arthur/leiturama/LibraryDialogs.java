@@ -69,22 +69,16 @@ public class LibraryDialogs {
                     break;
             }
         }
-        else {
-
-            switch (bookStatus) {
-
-                case AVAILABLE:
-                    title = R.string.request_borrowing_title;
-                    msg = R.string.request_borrowing_msg;
-                    action = true;
-                    break;
-
-                case LENT:
-                    title = R.string.assign_devolution_title;
-                    msg = R.string.assign_devolution_msg;
-                    action = true;
-                    break;
-            }
+        else if ((user.getId().equals(book.getBorrower().getId())) && (book.getStatus().equals(Book.BookStatus.LENT.toString()))){
+            title = R.string.assign_devolution_title;
+            msg = R.string.assign_devolution_msg;
+            action = true;
+        }
+        else if(book.getStatus().equals(Book.BookStatus.AVAILABLE.toString())){
+            title = R.string.request_borrowing_title;
+            msg = R.string.request_borrowing_msg;
+            action = true;
+            book.setBorrower(user);
         }
     }
 
@@ -123,6 +117,7 @@ public class LibraryDialogs {
     private void updateBookStatus(){
         Map<String, Object> update = new HashMap<>();
         update.put("status", book.getStatus());
+        update.put("borrower",book.getBorrower());
 
         FBLoader.fbFirestore.collection("books").document(book.getId())
             .set(update, SetOptions.merge());
