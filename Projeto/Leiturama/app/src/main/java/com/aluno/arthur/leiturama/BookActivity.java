@@ -209,6 +209,7 @@ public class BookActivity extends AppCompatActivity {
         if (this.isValid()) {
 
             book.setOwner(user);
+            book.setStatus(Book.BookStatus.AVAILABLE.toString());
             db.collection("books").add(this.book);
 
             BitmapDrawable bitmapDrawable = (BitmapDrawable) mCover.getDrawable();

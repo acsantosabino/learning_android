@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,6 +43,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
     private TextView mStats;
     private ListView mBooks;
     private ArrayList<String> books;
+    private ArrayList<Book> booksComplete;
     private static final int REQUEST_CAMERA = 1;
     private BarCodeDialog barCodeDialog;
     private User user;
@@ -60,6 +63,14 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
         barCodeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         readUser();
+
+        mBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LibraryDialogs libraryDialogs = new LibraryDialogs(PerfilActivity.this, booksComplete.get(position), user);
+                libraryDialogs.showAlert();
+            }
+        });
     }
 
     @Override
@@ -110,6 +121,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
                 stats += " | ";
                 stats += user.getN_borrowed() + " read";
                 mStats.setText(stats);
+
             }
         });
     }
@@ -128,6 +140,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
 
     private void readBooks(){
         books = new ArrayList();
+        booksComplete = new ArrayList();
         ownedBooks = 0;
         CollectionReference booksRef= FBLoader.fbFirestore.collection("books");
         booksRef.orderBy("title", Query.Direction.ASCENDING).get()
@@ -138,7 +151,9 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Book book = document.toObject(Book.class);
                             if( book.getOwner().getId().equals(user.getId())) {
+                                book.setId(document.getId());
                                 books.add(book.getTitle());
+                                booksComplete.add(book);
                                 ownedBooks += 1;
                             }
                         }
