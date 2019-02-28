@@ -324,5 +324,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    public void goToNewUser(View view){
+        Intent i = new Intent(this, NewUserActivity.class);
+        i.putExtra(Intent.EXTRA_EMAIL, mEmailView.getText().toString());
+        startActivity(i);
+    }
+
 }
 
