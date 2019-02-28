@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="perfil_stats">0 lent | 0 owned | 0 read</string>
+    <string name="menu_add_book">Add book</string>
+    <string name="menu_edit_perfil">Edit perfil</string>
+</resources>

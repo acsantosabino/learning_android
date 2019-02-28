@@ -4,22 +4,19 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.util.Log;
 
+import com.aluno.arthur.leiturama.R;
 import com.aluno.arthur.leiturama.models.Book;
+import com.aluno.arthur.leiturama.support.JsonParer;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
-
-import com.aluno.arthur.leiturama.R;
-import com.aluno.arthur.leiturama.support.JsonParer;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 public class BookReqTask extends AsyncTask {
 

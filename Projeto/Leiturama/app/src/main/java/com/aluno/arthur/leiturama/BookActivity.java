@@ -6,8 +6,11 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,14 +19,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.aluno.arthur.leiturama.models.Book;
+import com.aluno.arthur.leiturama.models.User;
 import com.aluno.arthur.leiturama.services.BookReqTask;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 
-public class BookActivity extends AppCompatActivity{
+public class BookActivity extends AppCompatActivity {
 
     private View mProgressView;
     private View mBookFormView;
@@ -34,8 +44,12 @@ public class BookActivity extends AppCompatActivity{
     private TextInputEditText mDescription;
     private TextInputEditText mPageCount;
     private TextInputEditText mCategories;
+    private ImageView mCover;
+    private StorageReference imgRef;
     private BookReqTask bookReqTask;
+    private FirebaseFirestore db;
     private Book book;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +63,21 @@ public class BookActivity extends AppCompatActivity{
         mPublishedDate = findViewById(R.id.book_publishedDate);
         mPageCount = findViewById(R.id.book_pageCount);
         mDescription = findViewById(R.id.book_description);
+        mCover = (ImageView) findViewById(R.id.book_cover);
 
         mBookFormView = findViewById(R.id.book_form);
         mProgressView = findViewById(R.id.load_book_progress);
 
+        db = FirebaseFirestore.getInstance();
+
         Intent i = getIntent();
         String isbn = i.getStringExtra("ISBN");
+        user = (User) i.getSerializableExtra("USER");
+
+        this.book = new Book(isbn);
         bookReqTask = new BookReqTask(this, isbn);
+
+        imgRef = FirebaseStorage.getInstance().getReference().child("covers/" + isbn + ".jpg");
         showProgress(true);
         bookReqTask.execute();
     }
@@ -109,8 +131,18 @@ public class BookActivity extends AppCompatActivity{
         super.onStop();
     }
 
+    private boolean isValid() {
+        boolean result = true;
+
+        result &= !mTilte.getText().toString().isEmpty();
+        result &= !mAuthos.getText().toString().isEmpty();
+        result &= !mPageCount.getText().toString().isEmpty();
+
+        return result;
+    }
+
     @Subscribe
-    public void onEvent(Book book){
+    public void onEvent(Book book) {
         bookReqTask = null;
 
         this.book = book;
@@ -124,7 +156,6 @@ public class BookActivity extends AppCompatActivity{
         showProgress(false);
     }
 
-
     @Subscribe
     public void onEvent(String imgPath) {
         showProgress(false);
@@ -136,14 +167,14 @@ public class BookActivity extends AppCompatActivity{
     @Subscribe
     public void onEvent(Error error) {
         showProgress(false);
-        Toast.makeText(this,"Erro",Toast.LENGTH_LONG).show();
-        Log.e("BOOK ERROR",error.getMessage());
+        Toast.makeText(this, "Erro", Toast.LENGTH_LONG).show();
+        Log.e("BOOK ERROR", error.getMessage());
     }
 
     public void setBookCover() {
-        File imgFile = new  File(this.getFilesDir(),this.book.getIsbn()+".jpg");
+        File imgFile = new File(this.book.getImagePath());
 
-        if(imgFile.exists()){
+        if (imgFile.exists()) {
 
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
@@ -151,6 +182,40 @@ public class BookActivity extends AppCompatActivity{
 
             myImage.setImageBitmap(myBitmap);
 
+        }
+    }
+
+    private void uploadFB() {
+        File imgFile = new File(this.getFilesDir(), book.getIsbn() + ".jpg");
+
+        if (imgFile.exists()) {
+            imgRef.putFile(Uri.fromFile(imgFile))
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Log.e("IMG upload", exception.getMessage());
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d("IMG upload", taskSnapshot.getMetadata().getPath());
+                }
+            });
+        }
+    }
+
+    public void saveBook(View view) {
+
+        if (this.isValid()) {
+
+            book.setOwner(user);
+            book.setStatus(Book.BookStatus.AVAILABLE.toString());
+            db.collection("books").add(this.book);
+
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) mCover.getDrawable();
+            uploadFB();
+
+            finish();
         }
     }
 }

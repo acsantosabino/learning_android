@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FBLoader.fbAuth;
     }
 
     private void populateAutoComplete() {
@@ -319,9 +319,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         else {
             Toast.makeText(LoginActivity.this, user.getEmail() + " logado",Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, BarCodeExampleActivity.class);
+            Intent i = new Intent(this, PerfilActivity.class);
             startActivity(i);
         }
+    }
+
+    public void goToNewUser(View view){
+        Intent i = new Intent(this, NewUserActivity.class);
+        i.putExtra(Intent.EXTRA_EMAIL, mEmailView.getText().toString());
+        startActivity(i);
     }
 
 }
