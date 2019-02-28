@@ -40,8 +40,8 @@ public class NewUserActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         mEmail.setText(i.getStringExtra(Intent.EXTRA_EMAIL));
-        mAuth = FirebaseAuth.getInstance();
-        db  = FirebaseFirestore.getInstance();
+        mAuth = FBLoader.fbAuth;
+        db  = FBLoader.fbFirestore;
     }
 
     private void singUp(String email, String password){
