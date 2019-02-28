@@ -105,6 +105,11 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
         return true;
     }
 
+    public void onLibraryBtnClick(View view){
+        Intent i = new Intent(this, LibraryActivity.class);
+        this.startActivity(i);
+    }
+
     private void readUser(){
         FirebaseUser fbUser = FBLoader.fbAuth.getCurrentUser();
         FBLoader.fbFirestore.collection("user").document(fbUser.getUid())
