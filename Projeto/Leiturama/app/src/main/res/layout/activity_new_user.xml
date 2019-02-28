@@ -68,7 +68,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/user_password_group">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/user_password"
@@ -80,6 +81,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:id="@+id/user_btn"
             android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
