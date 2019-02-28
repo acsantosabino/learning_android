@@ -62,8 +62,6 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
         barCodeDialog = new BarCodeDialog(this);
         barCodeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        readUser();
-
         mBooks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -76,7 +74,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
 
     @Override
     protected void onResume() {
-        readBooks();
+        readUser();
         super.onResume();
     }
 
@@ -98,6 +96,10 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
             case R.id.menu_perfil_add:
                 checkCamera();
                 break;
+
+            case R.id.menu_perfil_logout:
+                FBLoader.fbAuth.signOut();
+                finish();
 
             default:
                 break;
@@ -123,6 +125,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
                 stats += user.getN_borrowed() + " read";
                 mStats.setText(stats);
 
+                readBooks();
             }
         });
     }

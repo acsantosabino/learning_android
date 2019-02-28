@@ -68,7 +68,7 @@ public class BookActivity extends AppCompatActivity {
         mBookFormView = findViewById(R.id.book_form);
         mProgressView = findViewById(R.id.load_book_progress);
 
-        db = FirebaseFirestore.getInstance();
+        db = FBLoader.fbFirestore;
 
         Intent i = getIntent();
         String isbn = i.getStringExtra("ISBN");
@@ -77,7 +77,7 @@ public class BookActivity extends AppCompatActivity {
         this.book = new Book(isbn);
         bookReqTask = new BookReqTask(this, isbn);
 
-        imgRef = FirebaseStorage.getInstance().getReference().child("covers/" + isbn + ".jpg");
+        imgRef = FBLoader.fbStorage.child("covers/" + isbn + ".jpg");
         showProgress(true);
         bookReqTask.execute();
     }
@@ -212,9 +212,7 @@ public class BookActivity extends AppCompatActivity {
             book.setStatus(Book.BookStatus.AVAILABLE.toString());
             db.collection("books").add(this.book);
 
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) mCover.getDrawable();
             uploadFB();
-
             finish();
         }
     }
