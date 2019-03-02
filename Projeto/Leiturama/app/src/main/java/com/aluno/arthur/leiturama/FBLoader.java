@@ -83,7 +83,6 @@ public class FBLoader extends AppCompatActivity {
                         Log.d("BOOKS","Result size "+task.getResult().size());
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Book book = document.toObject(Book.class);
-                            info.setText(book.getTitle());
                             downloadCover(book);
                         }
                     }
@@ -125,7 +124,6 @@ public class FBLoader extends AppCompatActivity {
             }
             else {
                 Log.d("BOOKS","Count no path "+countBooks);
-                info.setText("covers/"+book.getTitle());
                 goNext();
             }
         }
