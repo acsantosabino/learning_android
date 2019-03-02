@@ -7,5 +7,9 @@
     <item
         android:id="@+id/menu_perfil_add"
         android:title="@string/menu_add_book"/>
+    <item
+        android:id="@+id/menu_perfil_logout"
+        android:title="@string/menu_logout"/>
+
 
 </menu>

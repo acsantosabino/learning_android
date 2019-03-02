@@ -24,6 +24,7 @@ public class Book implements Serializable {
     private int pageCount;
     private String imagePath;
     private User owner;
+    private User borrower;
     private String status;
 
     public Book() {}
@@ -118,6 +119,14 @@ public class Book implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public User getBorrower() {
+        return borrower;
+    }
+
+    public void setBorrower(User borrower) {
+        this.borrower = borrower;
     }
 
     public String getStatus() {

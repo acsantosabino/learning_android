@@ -3,4 +3,5 @@
     <string name="perfil_stats">0 lent | 0 owned | 0 read</string>
     <string name="menu_add_book">Add book</string>
     <string name="menu_edit_perfil">Edit perfil</string>
+    <string name="menu_logout">Logout</string>
 </resources>

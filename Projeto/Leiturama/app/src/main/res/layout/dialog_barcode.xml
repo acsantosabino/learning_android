@@ -11,12 +11,12 @@
 
     <SurfaceView
         android:id="@+id/camera_view"
-        android:layout_width="match_parent"
+        android:layout_width="720px"
         android:layout_height="480px" />
 
     <Button
         android:id="@+id/cancel_btn"
-        android:layout_width="match_parent"
+        android:layout_width="720px"
         android:layout_height="wrap_content"
         android:text="@string/cancel_btn"/>
 
