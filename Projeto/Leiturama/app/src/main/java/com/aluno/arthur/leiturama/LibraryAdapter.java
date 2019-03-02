@@ -1,15 +1,19 @@
 package com.aluno.arthur.leiturama;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aluno.arthur.leiturama.models.Book;
 
+import java.io.File;
 import java.util.List;
 
 public class LibraryAdapter extends BaseAdapter {
@@ -92,7 +96,13 @@ public class LibraryAdapter extends BaseAdapter {
         TextView tvBookStatus = (TextView)v.findViewById(R.id.libraryBookStatus);
         tvBookStatus.setText(book.getStatus());
 
+        File imgFile = new  File(activity.getFilesDir(), "/sdcard/Images/test_image.jpg");
 
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            ImageView ivCoverBook = (ImageView) activity.findViewById(R.id.libraryBookCover);
+            ivCoverBook.setImageBitmap(myBitmap);
+        }
         return v;
     }
 }
