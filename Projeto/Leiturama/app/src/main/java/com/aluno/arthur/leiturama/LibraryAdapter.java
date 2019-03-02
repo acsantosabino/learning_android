@@ -19,9 +19,25 @@ public class LibraryAdapter extends BaseAdapter {
     private AdapterView.OnItemClickListener onClick =
             new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
-                    Toast.makeText(activity, books.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity,
+                            "Direcionar para tela de detalhes de " + books.get(position).getTitle(),
+                            Toast.LENGTH_SHORT).show();
                 }
             };
+
+    private AdapterView.OnItemLongClickListener onItemLongClick =
+            new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    Book b = books.get(position);
+                    new LibraryDialogs(activity, b, FBLoader.usuarioLogado).showAlert();
+                    return true;
+                }
+            };
+
+    public AdapterView.OnItemLongClickListener getOnItemLongClick(){
+        return onItemLongClick;
+    }
 
     public AdapterView.OnItemClickListener getOnItemClick(){
         return onClick;

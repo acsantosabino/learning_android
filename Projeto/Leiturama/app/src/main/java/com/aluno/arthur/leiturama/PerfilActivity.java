@@ -117,6 +117,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 user = documentSnapshot.toObject(User.class);
+                FBLoader.usuarioLogado = user;
                 mPerfilName.setText(user.getName());
                 mPhone.setText(user.getPhone());
                 String stats = new String();

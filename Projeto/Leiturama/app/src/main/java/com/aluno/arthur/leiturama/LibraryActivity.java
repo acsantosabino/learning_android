@@ -56,10 +56,24 @@ public class LibraryActivity extends AppCompatActivity {
         @Override
         public void onSuccess(QuerySnapshot collection) {
             books = new ArrayList<>();
+
+            List<Book> lentToMe = new ArrayList<>();
+            List<Book> available = new ArrayList<>();
+            List<Book> unavailable = new ArrayList<>();
+
+
             for ( DocumentSnapshot snapShot: collection) {
                 Book b = snapShot.toObject(Book.class);
-                books.add(b);
+                if(b.getStatus().equals( Book.BookStatus.LENT )){
+                    // Como saber informações do empréstimo ?
+                    unavailable.add(b);
+                } else {
+                    available.add(b);
+                }
             }
+            books.addAll(lentToMe);
+            books.addAll(available);
+            books.addAll(unavailable);
             atualizarListViewBiblioteca();
         }
     };
@@ -78,5 +92,6 @@ public class LibraryActivity extends AppCompatActivity {
         lvLibrary.setAdapter(adapter);
         lvLibrary.setOnCreateContextMenuListener(contextMenuLibraryListener);
         lvLibrary.setOnItemClickListener(adapter.getOnItemClick());
+        lvLibrary.setOnItemLongClickListener(adapter.getOnItemLongClick());
     }
 }

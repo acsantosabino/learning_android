@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.aluno.arthur.leiturama.models.User;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,6 +25,7 @@ public class FBLoader extends AppCompatActivity {
 
     public static FirebaseFirestore fbFirestore;
     public static StorageReference  fbStorage;
+    public static User usuarioLogado;
 
 
     @Override
