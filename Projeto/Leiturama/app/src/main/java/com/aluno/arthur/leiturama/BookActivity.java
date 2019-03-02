@@ -172,7 +172,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     public void setBookCover() {
-        File imgFile = new File(this.book.getImagePath());
+        File imgFile = new File(getFilesDir(), this.book.getImagePath());
 
         if (imgFile.exists()) {
 
@@ -186,7 +186,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void uploadFB() {
-        File imgFile = new File(this.getFilesDir(), book.getIsbn() + ".jpg");
+        File imgFile = new File(this.getFilesDir(), book.getImagePath());
 
         if (imgFile.exists()) {
             imgRef.putFile(Uri.fromFile(imgFile))
