@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 
 import com.aluno.arthur.leiturama.R;
@@ -19,6 +20,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ImgDownload extends AsyncTask {
@@ -113,14 +116,15 @@ public class ImgDownload extends AsyncTask {
 
     private String saveBitmap(Bitmap bitmap) throws IOException{
 
-        File file = new File(context.getFilesDir(), imgName+".jpg");
+        File file = new File(context.getFilesDir(), "covers/" + imgName+".jpg");
         OutputStream outputStream = new FileOutputStream(file);
 
         bitmap.compress(Bitmap.CompressFormat.JPEG,90,outputStream);
         outputStream.flush();
         outputStream.close();
 
-        return file.getPath();
+        List<String> paths = Uri.fromFile(file).getPathSegments();
+        return paths.get(paths.size()-2) + File.separator + paths.get(paths.size()-1);
     }
 
     public int getResponseCode() {
