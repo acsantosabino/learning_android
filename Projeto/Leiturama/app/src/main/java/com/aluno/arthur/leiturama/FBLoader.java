@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.aluno.arthur.leiturama.models.User;
 import com.aluno.arthur.leiturama.models.Book;
 import com.aluno.arthur.leiturama.services.ImgDownload;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,9 +53,13 @@ public class FBLoader extends AppCompatActivity {
 
     public static FirebaseFirestore fbFirestore;
     public static StorageReference  fbStorage;
+
+    public static User usuarioLogado;
+
     public static File coversPath;
     public int totalBooks = 0;
     public int countBooks = 0;
+
 
     private TextView info;
 
