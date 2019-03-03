@@ -36,7 +36,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.BarCodeDialogListener {
+public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.BarCodeDialogListener, LibraryDialogs.LibaryDialogListener {
 
     private TextView mPerfilName;
     private TextView mPhone;
@@ -66,7 +66,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 LibraryDialogs libraryDialogs = new LibraryDialogs(PerfilActivity.this, booksComplete.get(position), user);
-                libraryDialogs.showAlert();
+                libraryDialogs.show();
                 return true;
             }
         });
@@ -232,5 +232,10 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
         i.putExtra("ISBN",isbn);
         i.putExtra("USER",user);
         startActivity(i);
+    }
+
+    @Override
+    public void onActionConfim() {
+        readBooks();
     }
 }
