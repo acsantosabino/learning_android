@@ -82,22 +82,22 @@ public class LibraryAdapter extends BaseAdapter {
         Book book = this.books.get(position);
 
         TextView tvBookTitle = (TextView)v.findViewById(R.id.libraryBookTitle);
-        tvBookTitle.setText(book.getTitle());
+        tvBookTitle.setText(book.getTitle().toUpperCase());
 
         TextView tvBookAuthor = (TextView)v.findViewById(R.id.libraryBookAuthor);
-        tvBookAuthor.setText(book.getAuthor());
+        tvBookAuthor.setText("Autor: " + book.getAuthor());
 
         TextView tvBookPublisher = (TextView)v.findViewById(R.id.libraryBookPublisher);
-        tvBookPublisher.setText(book.getPublisher());
+        tvBookPublisher.setText("Editora: " + book.getPublisher());
 
         TextView tvBookCategories = (TextView)v.findViewById(R.id.libraryBookCategories);
-        tvBookCategories.setText(book.getCategories());
+        tvBookCategories.setText("Categoria: " + book.getCategories());
 
         TextView tvBookIsbn = (TextView)v.findViewById(R.id.libraryBookIsbn);
-        tvBookIsbn.setText(book.getIsbn());
+        tvBookIsbn.setText("ISBN: " + book.getIsbn());
 
         TextView tvBookStatus = (TextView)v.findViewById(R.id.libraryBookStatus);
-        tvBookStatus.setText(book.getStatus());
+        tvBookStatus.setText("Status: " + book.getStatus());
 
         File imgFile = new  File(activity.getFilesDir(), (book.getImagePath()==null)?"":book.getImagePath());
         if(imgFile.exists()){
