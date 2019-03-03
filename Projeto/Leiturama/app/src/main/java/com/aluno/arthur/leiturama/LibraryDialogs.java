@@ -12,9 +12,6 @@ import com.aluno.arthur.leiturama.models.User;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.SetOptions;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class LibraryDialogs extends Dialog {
 
     private Activity context;
@@ -22,7 +19,7 @@ public class LibraryDialogs extends Dialog {
     private Book book;
     private int title;
     private int msg;
-    private boolean action;
+    private boolean action, negativeAction;
     public LibaryDialogListener mListener;
 
     public LibraryDialogs(Activity context, Book book, User user) {
@@ -31,6 +28,7 @@ public class LibraryDialogs extends Dialog {
         this.user = user;
         this.book = book;
         this.action = false;
+        this.negativeAction = false;
         checkListener();
         getContentText();
     }
@@ -58,13 +56,22 @@ public class LibraryDialogs extends Dialog {
             AlertDialog.Builder alertDialogBilder = new AlertDialog.Builder(context);
             alertDialogBilder.setTitle(title);
             alertDialogBilder.setMessage(msg);
-            alertDialogBilder.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
+            alertDialogBilder.setPositiveButton(R.string.lable_ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     alertAction();
                     mListener.onActionConfim();
                 }
             });
+            if(negativeAction){
+                alertDialogBilder.setNegativeButton(R.string.lable_no, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        borrowDenied();
+                        mListener.onActionConfim();
+                    }
+                });
+            }
             alertDialogBilder.show();
         }
         else {
@@ -76,7 +83,13 @@ public class LibraryDialogs extends Dialog {
 
         Book.BookStatus bookStatus = Book.BookStatus.valueOf(book.getStatus());
 
-        if(user.getId().equals(book.getOwner().getId())){
+        if(bookStatus == Book.BookStatus.AVAILABLE){
+            title = R.string.request_borrowing_title;
+            msg = R.string.request_borrowing_msg;
+            action = true;
+            book.setBorrower(user);
+        }
+        else if(user.getId().equals(book.getOwner().getId())){
 
             switch (bookStatus) {
 
@@ -84,6 +97,7 @@ public class LibraryDialogs extends Dialog {
                     title = R.string.confirm_borrowing_title;
                     msg = R.string.confirm_borrowing_msg;
                     action = true;
+                    negativeAction = true;
                     break;
 
                 case DEVOLUTION_ASKED:
@@ -94,17 +108,18 @@ public class LibraryDialogs extends Dialog {
             }
         }
         else if(book.getBorrower() != null) {
-            if ((user.getId().equals(book.getBorrower().getId())) && (bookStatus == Book.BookStatus.LENT)) {
-                title = R.string.assign_devolution_title;
-                msg = R.string.assign_devolution_msg;
-                action = true;
+            if ((user.getId().equals(book.getBorrower().getId()))){
+                if (bookStatus == Book.BookStatus.BORROW_ASKED){
+                    title = R.string.cancel_borrowing_title;
+                    msg = R.string.cancel_borrowing_msg;
+                    action = true;
+                }
+                else if (bookStatus == Book.BookStatus.LENT) {
+                    title = R.string.assign_devolution_title;
+                    msg = R.string.assign_devolution_msg;
+                    action = true;
+                }
             }
-        }
-        else if(bookStatus == Book.BookStatus.AVAILABLE){
-            title = R.string.request_borrowing_title;
-            msg = R.string.request_borrowing_msg;
-            action = true;
-            book.setBorrower(user);
         }
     }
 
@@ -125,9 +140,15 @@ public class LibraryDialogs extends Dialog {
                     break;
             }
         }
-        else if ((bookStatus == Book.BookStatus.LENT) && user.getId().equals(book.getBorrower().getId()))
-        {
-            book.setStatus(Book.BookStatus.DEVOLUTION_ASKED.toString());
+        else if(book.getBorrower() != null) {
+            if ((user.getId().equals(book.getBorrower().getId()))) {
+                if (bookStatus == Book.BookStatus.LENT) {
+                    book.setStatus(Book.BookStatus.DEVOLUTION_ASKED.toString());
+                } else if (bookStatus == Book.BookStatus.BORROW_ASKED) {
+                    book.setStatus(Book.BookStatus.AVAILABLE.toString());
+                    book.setBorrower(null);
+                }
+            }
         }
         else if (bookStatus == Book.BookStatus.AVAILABLE) {
             book.setStatus(Book.BookStatus.BORROW_ASKED.toString());
@@ -137,12 +158,13 @@ public class LibraryDialogs extends Dialog {
         updateBookStatus();
 
     }
+    public void borrowDenied(){
+        book.setStatus(Book.BookStatus.AVAILABLE.toString());
+        book.setBorrower(null);
+        updateBookStatus();
+    }
 
     private void updateBookStatus(){
-        Map<String, Object> update = new HashMap<>();
-        update.put("status", book.getStatus());
-        update.put("borrower", book.getBorrower());
-
         DocumentReference bookRef = FBLoader.fbFirestore.collection("books").document(book.getId());
         bookRef.set(book, SetOptions.merge());
     }
