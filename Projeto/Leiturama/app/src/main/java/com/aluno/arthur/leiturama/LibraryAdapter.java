@@ -1,6 +1,7 @@
 package com.aluno.arthur.leiturama;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
@@ -19,13 +20,15 @@ import java.util.List;
 public class LibraryAdapter extends BaseAdapter {
     private final List<Book> books;
     private final Activity activity;
+    public final static String INTENT_EXTRA_BOOK_DETAIL = "LibraryAdapter.bookSelected";
 
     private AdapterView.OnItemClickListener onClick =
             new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
-                    Toast.makeText(activity,
-                            "Direcionar para tela de detalhes de " + books.get(position).getTitle(),
-                            Toast.LENGTH_SHORT).show();
+                    Book b = books.get(position);
+                    Intent i = new Intent(activity, BookDetailsActivity.class);
+                    i.putExtra(INTENT_EXTRA_BOOK_DETAIL, b);
+                    activity.startActivity(i);
                 }
             };
 
@@ -95,13 +98,13 @@ public class LibraryAdapter extends BaseAdapter {
 
         TextView tvBookStatus = (TextView)v.findViewById(R.id.libraryBookStatus);
         tvBookStatus.setText(book.getStatus());
-
-        File imgFile = new  File(activity.getFilesDir(), book.getImagePath());
+        File imgFile = new  File(activity.getFilesDir(), (book.getImagePath()==null)?"":book.getImagePath());
         if(imgFile.exists()){
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             ImageView ivCoverBook = (ImageView) v.findViewById(R.id.libraryBookCover);
             ivCoverBook.setImageBitmap(myBitmap);
         }
+
         return v;
     }
 }
