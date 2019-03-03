@@ -83,13 +83,7 @@ public class LibraryDialogs extends Dialog {
 
         Book.BookStatus bookStatus = Book.BookStatus.valueOf(book.getStatus());
 
-        if(bookStatus == Book.BookStatus.AVAILABLE){
-            title = R.string.request_borrowing_title;
-            msg = R.string.request_borrowing_msg;
-            action = true;
-            book.setBorrower(user);
-        }
-        else if(user.getId().equals(book.getOwner().getId())){
+        if(user.getId().equals(book.getOwner().getId())){
 
             switch (bookStatus) {
 
@@ -120,6 +114,12 @@ public class LibraryDialogs extends Dialog {
                     action = true;
                 }
             }
+        }
+        else if(bookStatus == Book.BookStatus.AVAILABLE){
+            title = R.string.request_borrowing_title;
+            msg = R.string.request_borrowing_msg;
+            action = true;
+            book.setBorrower(user);
         }
     }
 
