@@ -74,6 +74,6 @@ public class BookDetailsActivity extends AppCompatActivity {
     }
 
     public void solicitarEmprestimo(View view){
-        new LibraryDialogs(this, this.book, FBLoader.usuarioLogado).showAlert();
+        new LibraryDialogs(this, this.book, FBLoader.usuarioLogado).show();
     }
 }
