@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/bookDetailsCover"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="15git 0dp"
+                android:layout_height="100dp"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/cover_unknown"/>
 
@@ -81,6 +81,10 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/bookDetailsOwnerMail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/bookDetailsOwnerTelephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button

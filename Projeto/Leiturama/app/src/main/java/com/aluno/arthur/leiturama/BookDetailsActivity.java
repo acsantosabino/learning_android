@@ -62,9 +62,11 @@ public class BookDetailsActivity extends AppCompatActivity implements LibraryDia
 
         //Tratamento da parte do proprietário
         TextView tvOwnerName = findViewById(R.id.bookDetailsOwnerName);
-        tvOwnerName.setText("Nome: " + book.getOwner().name);
+        tvOwnerName.setText("Nome: " + book.getOwner().getName());
         TextView tvOwnerMail = findViewById(R.id.bookDetailsOwnerMail);
-        tvOwnerMail.setText("E-mail: " + book.getOwner().email);
+        tvOwnerMail.setText("E-mail: " + book.getOwner().getEmail());
+        TextView tvOwnerTelephone = findViewById(R.id.bookDetailsOwnerTelephone);
+        tvOwnerMail.setText("Telefone: " + book.getOwner().getPhone());
 
 //        if(book.getStatus().equals( Book.BookStatus.LENT ) ||
 //                book.getOwner().equals(FBLoader.usuarioLogado)){
