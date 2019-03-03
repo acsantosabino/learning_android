@@ -119,7 +119,6 @@ public class LibraryDialogs extends Dialog {
             title = R.string.request_borrowing_title;
             msg = R.string.request_borrowing_msg;
             action = true;
-            book.setBorrower(user);
         }
     }
 
