@@ -2,6 +2,7 @@ package com.aluno.arthur.leiturama;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +14,13 @@ import android.widget.Toast;
 import com.aluno.arthur.leiturama.models.Book;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryActivity extends AppCompatActivity {
+public class LibraryActivity extends AppCompatActivity implements LibraryDialogs.LibaryDialogListener {
     private List<Book> books = null;
     private ListView lvLibrary = null;
     private LibraryAdapter adapter = null;
@@ -64,9 +66,14 @@ public class LibraryActivity extends AppCompatActivity {
 
             for ( DocumentSnapshot snapShot: collection) {
                 Book b = snapShot.toObject(Book.class);
-                if(b.getStatus().equals( Book.BookStatus.LENT )){
-                    // Como saber informações do empréstimo ?
-                    unavailable.add(b);
+                b.setId(snapShot.getId());
+                if(b.getBorrower() != null){
+                    if(b.getBorrower().getId().equals(FBLoader.usuarioLogado.getId())){
+                        lentToMe.add(b);
+                    }
+                    else {
+                        unavailable.add(b);
+                    }
                 } else {
                     available.add(b);
                 }
@@ -83,7 +90,7 @@ public class LibraryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
         lvLibrary = findViewById(R.id.libraryLvBooks);
-        FBLoader.fbFirestore.collection("books").get().addOnSuccessListener(listener);
+//        FBLoader.fbFirestore.collection("books").orderBy("title", Query.Direction.ASCENDING).get().addOnSuccessListener(listener);
 
     }
 
@@ -93,5 +100,17 @@ public class LibraryActivity extends AppCompatActivity {
         lvLibrary.setOnCreateContextMenuListener(contextMenuLibraryListener);
         lvLibrary.setOnItemClickListener(adapter.getOnItemClick());
         lvLibrary.setOnItemLongClickListener(adapter.getOnItemLongClick());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FBLoader.fbFirestore.collection("books").orderBy("title", Query.Direction.ASCENDING).get().addOnSuccessListener(listener);
+
+    }
+
+    @Override
+    public void onActionConfim() {
+        FBLoader.fbFirestore.collection("books").orderBy("title", Query.Direction.ASCENDING).get().addOnSuccessListener(listener);
     }
 }

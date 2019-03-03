@@ -34,7 +34,7 @@ public class LibraryAdapter extends BaseAdapter {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                     Book b = books.get(position);
-                    new LibraryDialogs(activity, b, FBLoader.usuarioLogado).showAlert();
+                    new LibraryDialogs(activity, b, FBLoader.usuarioLogado).show();
                     return true;
                 }
             };
