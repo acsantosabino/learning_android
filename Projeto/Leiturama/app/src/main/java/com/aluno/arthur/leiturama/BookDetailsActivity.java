@@ -10,12 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aluno.arthur.leiturama.models.Book;
+import com.google.firebase.firestore.Query;
 
 import org.w3c.dom.Text;
 
 import java.io.File;
 
-public class BookDetailsActivity extends AppCompatActivity {
+public class BookDetailsActivity extends AppCompatActivity implements LibraryDialogs.LibaryDialogListener{
     private Book book = null;
 
     @Override
@@ -75,5 +76,10 @@ public class BookDetailsActivity extends AppCompatActivity {
 
     public void solicitarEmprestimo(View view){
         new LibraryDialogs(this, this.book, FBLoader.usuarioLogado).show();
+    }
+
+    @Override
+    public void onActionConfim() {
+        finish();
     }
 }
