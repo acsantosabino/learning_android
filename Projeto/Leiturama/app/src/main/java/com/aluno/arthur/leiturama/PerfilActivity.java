@@ -162,7 +162,7 @@ public class PerfilActivity extends AppCompatActivity implements BarCodeDialog.B
                             Book book = document.toObject(Book.class);
                             if( book.getOwner().getId().equals(user.getId())) {
                                 book.setId(document.getId());
-                                books.add(book.getTitle());
+                                books.add(book.getTitle()+"\nStatus: "+book.getStatus());
                                 booksComplete.add(book);
                                 ownedBooks += 1;
                             }
