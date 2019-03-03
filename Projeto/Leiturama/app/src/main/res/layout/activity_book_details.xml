@@ -20,7 +20,7 @@
 
             <ImageView
                 android:id="@+id/bookDetailsCover"
-                android:layout_width="15git 0dp"
+                android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/cover_unknown"/>
