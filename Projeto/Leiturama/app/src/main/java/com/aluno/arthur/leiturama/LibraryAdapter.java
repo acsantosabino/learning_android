@@ -99,11 +99,13 @@ public class LibraryAdapter extends BaseAdapter {
         TextView tvBookStatus = (TextView)v.findViewById(R.id.libraryBookStatus);
         tvBookStatus.setText("Status: " + book.getStatus());
 
-        File imgFile = new  File(activity.getFilesDir(), (book.getImagePath()==null)?"":book.getImagePath());
-        if(imgFile.exists()){
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            ImageView ivCoverBook = (ImageView) v.findViewById(R.id.libraryBookCover);
-            ivCoverBook.setImageBitmap(myBitmap);
+        if(book.getImagePath()!=null) {
+            File imgFile = new File(activity.getFilesDir(), book.getImagePath());
+            if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                ImageView ivCoverBook = (ImageView) v.findViewById(R.id.libraryBookCover);
+                ivCoverBook.setImageBitmap(myBitmap);
+            }
         }
 
         return v;

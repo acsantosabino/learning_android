@@ -53,11 +53,13 @@ public class BookDetailsActivity extends AppCompatActivity implements LibraryDia
         TextView tvStatus = findViewById(R.id.bookDetailsStatus);
         tvStatus.setText("Status: " + book.getStatus());
 
-        File imgFile = new  File(getFilesDir(), (book.getImagePath()==null)?"":book.getImagePath());
-        if(imgFile.exists()){
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            ImageView ivCoverBook = (ImageView) findViewById(R.id.bookDetailsCover);
-            ivCoverBook.setImageBitmap(myBitmap);
+        if(book.getImagePath()!= null) {
+            File imgFile = new File(getFilesDir(), book.getImagePath());
+            if (imgFile.exists()) {
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                ImageView ivCoverBook = (ImageView) findViewById(R.id.bookDetailsCover);
+                ivCoverBook.setImageBitmap(myBitmap);
+            }
         }
 
         //Tratamento da parte do proprietário
@@ -66,13 +68,7 @@ public class BookDetailsActivity extends AppCompatActivity implements LibraryDia
         TextView tvOwnerMail = findViewById(R.id.bookDetailsOwnerMail);
         tvOwnerMail.setText("E-mail: " + book.getOwner().getEmail());
         TextView tvOwnerTelephone = findViewById(R.id.bookDetailsOwnerTelephone);
-        tvOwnerMail.setText("Telefone: " + book.getOwner().getPhone());
-
-//        if(book.getStatus().equals( Book.BookStatus.LENT ) ||
-//                book.getOwner().equals(FBLoader.usuarioLogado)){
-//            Button btn = findViewById(R.id.bookDetailBtnSolicitarEmprestimo);
-//            btn.setEnabled(false);
-//        }
+        tvOwnerTelephone.setText("Telefone: " + book.getOwner().getPhone());
 
     }
 
