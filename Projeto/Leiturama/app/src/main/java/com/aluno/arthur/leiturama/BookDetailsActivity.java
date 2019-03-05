@@ -70,6 +70,29 @@ public class BookDetailsActivity extends AppCompatActivity implements LibraryDia
         TextView tvOwnerTelephone = findViewById(R.id.bookDetailsOwnerTelephone);
         tvOwnerTelephone.setText("Telefone: " + book.getOwner().getPhone());
 
+        Button btnBook = findViewById(R.id.bookDetailBtnSolicitarEmprestimo);
+        switch (Book.BookStatus.valueOf(book.getStatus())){
+            case AVAILABLE:
+                btnBook.setText(R.string.request_borrowing_action);
+                break;
+
+            case LENT:
+                btnBook.setText(R.string.assign_devolution_action);
+                break;
+
+            case BORROW_ASKED:
+                if(book.getOwner().getId().equals(FBLoader.usuarioLogado.getId())){
+                    btnBook.setText(R.string.confirm_borrowing_action);
+                }
+                else if (book.getBorrower().getId().equals(FBLoader.usuarioLogado.getId())){
+                    btnBook.setText(R.string.cancel_borrowing_action);
+                }
+                break;
+
+            case DEVOLUTION_ASKED:
+                btnBook.setText(R.string.confirm_devolution_action);
+        }
+
     }
 
     public void solicitarEmprestimo(View view){

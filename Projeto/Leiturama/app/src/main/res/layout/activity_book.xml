@@ -45,7 +45,7 @@
                     android:id="@+id/book_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/lable_title" />
+                    android:hint="@string/label_title" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -57,7 +57,7 @@
                     android:id="@+id/book_authors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/lable_authors" />
+                    android:hint="@string/label_authors" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -69,7 +69,7 @@
                     android:id="@+id/book_publisher"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/lable_publisher" />
+                    android:hint="@string/label_publisher" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -81,7 +81,7 @@
                     android:id="@+id/book_categories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/lable_categories" />
+                    android:hint="@string/label_categories" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -100,7 +100,7 @@
                         android:id="@+id/book_publishedDate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/lable_publishedDate"
+                        android:hint="@string/label_publishedDate"
                         android:inputType="date" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -115,7 +115,7 @@
                         android:id="@+id/book_pageCount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/lable_pageCount"
+                        android:hint="@string/label_pageCount"
                         android:inputType="number" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -129,7 +129,7 @@
                     android:id="@+id/book_description"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/lable_description"
+                    android:hint="@string/label_description"
                     android:maxLines="15"
                     android:textSize="14dp" />
 

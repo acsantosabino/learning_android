@@ -20,18 +20,18 @@
     <string name="error_connection">Connectio has been failed</string>
     <string name="error_request">Bad request</string>
 
-    <string name="lable_title">Title</string>
-    <string name="lable_authors">Authors</string>
-    <string name="lable_publisher">Publisher</string>
-    <string name="lable_publishedDate">Published Date</string>
-    <string name="lable_description">Description</string>
-    <string name="lable_pageCount">Number of Pages</string>
-    <string name="lable_categories">Categories</string>
+    <string name="label_title">Title</string>
+    <string name="label_authors">Authors</string>
+    <string name="label_publisher">Publisher</string>
+    <string name="label_publishedDate">Published Date</string>
+    <string name="label_description">Description</string>
+    <string name="label_pageCount">Number of Pages</string>
+    <string name="label_categories">Categories</string>
     <string name="save_btn">Save</string>
 
     <string name="cancel_btn">Cancel</string>
     <string name="error_permission_not_granted">Permission not granted</string>
     <string name="permission_request_canceled">Permission request canceled</string>
     <string name="title_error">Erro</string>
-    <string name="lable_ok">Ok</string>
+    <string name="label_ok">Ok</string>
 </resources>

@@ -56,7 +56,7 @@ public class LibraryDialogs extends Dialog {
             AlertDialog.Builder alertDialogBilder = new AlertDialog.Builder(context);
             alertDialogBilder.setTitle(title);
             alertDialogBilder.setMessage(msg);
-            alertDialogBilder.setPositiveButton(R.string.lable_ok, new DialogInterface.OnClickListener() {
+            alertDialogBilder.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     alertAction();
@@ -64,7 +64,7 @@ public class LibraryDialogs extends Dialog {
                 }
             });
             if(negativeAction){
-                alertDialogBilder.setNegativeButton(R.string.lable_no, new OnClickListener() {
+                alertDialogBilder.setNegativeButton(R.string.label_no, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         borrowDenied();

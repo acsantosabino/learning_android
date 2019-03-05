@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lable_no">No</string>
+    <string name="label_no">No</string>
     <string name="request_borrowing_title">Ask for the book?</string>
-    <string name="request_borrowing_msg">Esse livro esta disponivel para emprestimo.\
-        Para solicitar ao dono click em "SIM".</string>
+    <string name="request_borrowing_msg">This book is available for loan.\
+        To ask the owner click "OK".</string>
+
     <string name="cancel_borrowing_title">Cancel the request for this book?</string>
-    <string name="cancel_borrowing_msg">Você já solicitou esse livro.\
-        Para cancelar a solicitação click em "SIM".</string>
-    <string name="confirm_borrowing_title">Accept to borrow?</string>
-    <string name="confirm_borrowing_msg">Esse livro foi solicitado.\
-        Clique em "SIM" para dizer que aceita emprestar ou "NÃO" para negar.</string>
+    <string name="cancel_borrowing_msg">You have already requested this book.\
+        To cancel the request click on "YES".</string>
+
+    <string name="confirm_borrowing_title">Accept to lend?</string>
+    <string name="confirm_borrowing_msg">This book has been requested.\
+        Click "OK" to say you agree to lend or "NO" to deny.</string>
+
     <string name="assign_devolution_title">Return book?</string>
-    <string name="assign_devolution_msg">Clique em "SIM" para devolver esse livro.\
-        A devolução sera confirmada pelo dono do livro.</string>
+    <string name="assign_devolution_msg">Click "OK" to point out the return of this book.\
+        The return will be confirmed by the owner of the book.</string>
+
     <string name="confirm_devolution_title">The book has been returned?</string>
-    <string name="confirm_devolution_msg">Esse livro foi marcado como devolvido.\
-        Clique em "SIM" para confirmar a devolvolução.</string>
+    <string name="confirm_devolution_msg">this book has been marked as returned.\
+        Click "OK" to confirm the return.</string>
+
+
+    <string name="request_borrowing_action">Ask for this book</string>
+    <string name="cancel_borrowing_action">Cancel request</string>
+    <string name="confirm_borrowing_action">Accept to lend</string>
+    <string name="assign_devolution_action">Return book</string>
+    <string name="confirm_devolution_action">Confirm Return</string>
 
     <string name="no_action_available">You can not act over this book.</string>
 </resources>
