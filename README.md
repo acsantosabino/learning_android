@@ -38,6 +38,10 @@ Projeto prático de aplicativo
 
 Projeto prático de aplicativo
 
+## 9 - [NOTIFICATIONAPP]
+
+Aplicação com notificações agendadas
+
 ### Requisitos:
 
 * Conexão a internet
@@ -55,3 +59,4 @@ Projeto prático de aplicativo
 [CAMAPP]: https://github.com/acsantosabino/learning_android/tree/master/CamApp
 [FIREBASEAPP]: https://github.com/acsantosabino/learning_android/tree/master/FirebaseApp
 [PROJETO]: https://github.com/acsantosabino/learning_android/tree/master/Projeto
+[NOTIFICATIONAPP]: https://github.com/acsantosabino/learning_android/tree/master/NotificationApp
